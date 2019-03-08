@@ -1,0 +1,22 @@
+version: '3.6'
+
+volumes:
+  elk_data_local: {}
+
+networks:
+  elknet:
+    name: cryptotrading_elknet
+
+services:
+  elk:
+    build:
+      context: ./compose/elk/
+      dockerfile: Dockerfile
+    volumes:
+      - elk_data_local:/var/lib/elasticsearch
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    networks:
+      - elknet
